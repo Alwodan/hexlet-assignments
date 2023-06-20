@@ -100,11 +100,11 @@ public class UsersServlet extends HttpServlet {
                 """);
 
         if (optional.isPresent()) {
-            result.append("<tr>");
-            result.append("<td>").append(optional.get().get("id")).append("</td>");
-            result.append("<td><a href=\"/users/").append(optional.get().get("id")).append("\">");
-            result.append(optional.get().get("firstName")).append(" ").append(optional.get().get("lastName"));
-            result.append("</a></td></tr>");
+            HashMap<String, String> user = optional.get();
+            result.append("<td>").append(user.get("firstName")).append("</td>");
+            result.append("<td>").append(user.get("lastName")).append("</td>");
+            result.append("<td>").append(user.get("id")).append("</td>");
+            result.append("<td>").append(user.get("email")).append("</td>");
         } else {
             response.sendError(404);
         }

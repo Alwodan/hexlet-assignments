@@ -66,6 +66,7 @@ public class SessionServlet extends HttpServlet {
             response.setStatus(422);
             RequestDispatcher rq = request.getRequestDispatcher("/login.jsp");
             rq.forward(request, response);
+            return;
         }
 
         session.setAttribute("userId", user.get("id"));

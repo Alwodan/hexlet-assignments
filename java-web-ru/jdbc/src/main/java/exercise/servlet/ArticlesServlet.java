@@ -7,17 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContext;
 
+import java.sql.*;
 import java.util.*;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import exercise.TemplateEngineUtil;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-
 
 
 public class ArticlesServlet extends HttpServlet {
@@ -105,9 +100,24 @@ public class ArticlesServlet extends HttpServlet {
 
         ServletContext context = request.getServletContext();
         Connection connection = (Connection) context.getAttribute("dbConnection");
-        Map<String, String> article = new HashMap<>();
         // BEGIN
-        String sqlQuery = "SELECT * FROM articles WHERE id=?";
+        String sqlQuery = "SELECT MAX(id) FROM articles";
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            rs.next();
+            int maxID = rs.getInt(1);
+            if (getId(request) == null || Integer.parseInt(getId(request)) > maxID) {
+                response.setStatus(404);
+                return;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        Map<String, String> article = new HashMap<>();
+        sqlQuery = "SELECT * FROM articles WHERE id=?";
+
         try {
             PreparedStatement pr = connection.prepareStatement(sqlQuery);
             pr.setInt(1, Integer.parseInt(Objects.requireNonNull(getId(request))));

@@ -1,0 +1,29 @@
+databaseChangeLog:
+  # указывает начало единицы изменений
+  -  changeSet:
+       id:  1
+       author:  hexlet
+       changes:
+         # Создаём таблицу
+         -  createTable:
+              # Указываем имя таблицы
+              tableName:  person
+              # Создаём столбцы таблицы
+              columns:
+                -  column:
+                     # Указываем имя и тип данных в столбце
+                     name:  id
+                     type:  bigint
+                     # Указываем что значение поля генерируется автоматически
+                     autoIncrement:  true
+                     # Указываем, что значение является первичным ключом
+                     constraints:
+                       primaryKey:  true
+                       nullable:  false
+                # Создаём остальные столбцы
+                -  column:
+                     name:  first_name
+                     type:  varchar(250)
+                -  column:
+                     name:  last_name
+                     type:  varchar(250)

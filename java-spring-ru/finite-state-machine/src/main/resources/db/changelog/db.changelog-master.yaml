@@ -1,0 +1,28 @@
+databaseChangeLog:
+- changeSet:
+    id: 1685432410001-1
+    author: maksimlitvinov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: postsPK
+            name: id
+            type: BIGINT
+        - column:
+            name: body
+            type: CLOB
+        - column:
+            name: state
+            type: SMALLINT
+        - column:
+            constraints:
+              unique: true
+            name: title
+            type: VARCHAR(255)
+        tableName: posts
+

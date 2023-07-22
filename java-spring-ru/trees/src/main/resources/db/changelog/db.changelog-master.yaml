@@ -1,0 +1,26 @@
+databaseChangeLog:
+- changeSet:
+    id: 1685437102610-1
+    author: maksimlitvinov (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: coursesPK
+            name: id
+            type: BIGINT
+        - column:
+            name: description
+            type: CLOB
+        - column:
+            name: path
+            type: VARCHAR(255)
+        - column:
+            name: title
+            type: VARCHAR(255)
+        tableName: courses
+

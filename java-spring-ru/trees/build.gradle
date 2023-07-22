@@ -1,0 +1,64 @@
+plugins {
+  id 'org.springframework.boot' version '3.0.6'
+  id 'io.spring.dependency-management' version '1.1.0'
+  id 'java'
+  id 'com.adarshr.test-logger' version '3.0.0'
+  id 'org.liquibase.gradle' version '2.2.0'
+}
+
+group = 'exercise'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation(
+          'org.springframework.boot:spring-boot-starter-web',
+          'org.springframework.boot:spring-boot-starter-data-jpa',
+          'com.h2database:h2:2.1.214',
+          'org.liquibase:liquibase-core'
+  )
+
+  testImplementation(
+          'org.springframework.boot:spring-boot-starter-test',
+          'com.github.database-rider:rider-junit5:1.36.0'
+  )
+
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+
+  liquibaseRuntime(
+          sourceSets.main.output,
+          'org.liquibase:liquibase-core',
+          'info.picocli:picocli:4.7.1',
+          'org.liquibase.ext:liquibase-hibernate6:4.21.1',
+          'org.springframework.boot:spring-boot-starter-data-jpa',
+          'com.h2database:h2',
+  )
+
+}
+
+test {
+  useJUnitPlatform()
+}
+
+testlogger {
+  showStandardStreams = true
+}
+
+diffChangelog {
+  dependsOn compileJava
+}
+
+liquibase {
+  activities {
+    main {
+      changelogFile 'src/main/resources/db/changelog/db.changelog-master.yaml'
+      url 'jdbc:h2:file:./hexlet'
+      referenceUrl 'hibernate:spring:exercise.model.' +
+              '?dialect=org.hibernate.dialect.H2Dialect' +
+              '&hibernate.physical_naming_strategy=org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy'
+    }
+  }
+}

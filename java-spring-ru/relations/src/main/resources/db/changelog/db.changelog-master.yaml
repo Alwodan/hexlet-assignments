@@ -1,0 +1,57 @@
+databaseChangeLog:
+- changeSet:
+    id: 1690042959183-1
+    author: alwodan (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: articlePK
+            name: id
+            type: BIGINT
+        - column:
+            name: body
+            type: CLOB
+        - column:
+            name: name
+            type: VARCHAR(255)
+        - column:
+            name: category_id
+            type: BIGINT
+        tableName: article
+- changeSet:
+    id: 1690042959183-2
+    author: alwodan (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: categoryPK
+            name: id
+            type: BIGINT
+        - column:
+            name: name
+            type: VARCHAR(255)
+        tableName: category
+- changeSet:
+    id: 1690042959183-3
+    author: alwodan (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: category_id
+        baseTableName: article
+        constraintName: FKy5kkohbk00g0w88fi05k2hcw
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: category
+        validate: true
+

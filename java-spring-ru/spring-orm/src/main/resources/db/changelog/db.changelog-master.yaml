@@ -1,0 +1,23 @@
+databaseChangeLog:
+- changeSet:
+    id: 1690030036354-1
+    author: alwodan (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: personPK
+            name: id
+            type: BIGINT
+        - column:
+            name: first_name
+            type: VARCHAR(255)
+        - column:
+            name: last_name
+            type: VARCHAR(255)
+        tableName: person
+

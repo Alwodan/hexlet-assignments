@@ -1,0 +1,10 @@
+people:
+    - first_name: John
+      last_name: Smith
+      email: john@gmail.com
+    - first_name: Jack
+      last_name: Doe
+      email: jack@mail.com
+    - first_name: Jassica
+      last_name: Simpson
+      email: jassika@yahoo.com

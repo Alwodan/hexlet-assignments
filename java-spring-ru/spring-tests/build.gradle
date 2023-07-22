@@ -1,0 +1,29 @@
+plugins {
+  id 'org.springframework.boot' version '3.0.6'
+  id 'io.spring.dependency-management' version '1.1.0'
+  id 'java'
+  id 'com.adarshr.test-logger' version '3.0.0'
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.liquibase:liquibase-core'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'com.github.database-rider:rider-junit5:1.36.0'
+  runtimeOnly 'com.h2database:h2'
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+testlogger {
+  showStandardStreams = true
+}
